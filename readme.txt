@@ -5,6 +5,10 @@ This is a repo to manage Sibcoin masternodes using ansible.
 This assumes you have ansible installed on a mac or linux computer.
 (Ansible does not work well running from a Windows host.)
 
+To get Ansible installed on an Ubuntu instance:
+apt-get update
+apt-get install ansible
+
 The detailed steps are for one master node, but you could manage multiple masternode remotes.
 
 To learn more about the steps in creating a Sibcoin masternode see:
@@ -47,12 +51,12 @@ Setup the remote hosts:
    mn1 or something)
 15. Add the remote host to the hosts file in this directory.
 16. Edit the ansible.cfg file for the location of your private file. 
-17. Ensure you can connect to all of the hosts in the hosts file.
-   ansible -m shell -a 'hostname' all
-18. Run the entire playbook on the hosts
+17. Run the entire playbook on the hosts (this will also install the necessary stuff for ansible to run)
   ansible-playbook -v sibcoin.yml 
     or if you just want to run it on a few hosts, use the '-l' for "limiting which hosts:
   ansible-playbook -v sibcoin.yml -l mn2,mn4
+18. Ensure you can connect to all of the hosts in the hosts file.
+   ansible -m shell -a 'hostname' all
 19. Connect to the remote host. 
 20. See if the sibcoin process is started by running "ps -ef | grep sibcoin"
 
