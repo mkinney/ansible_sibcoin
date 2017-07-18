@@ -1,0 +1,28 @@
+---
+
+- name: Add bitcoin
+  apt_repository:
+    repo: 'ppa:bitcoin/bitcoin'
+    state: present
+    update_cache: true
+
+- name: Install pre-requisites for non gui
+  package: name={{item}} state=installed
+  with_items:
+    - libdb4.8-dev 
+    - libdb4.8++-dev
+    - build-essential 
+    - libtool 
+    - autotools-dev 
+    - automake 
+    - pkg-config 
+    - libssl-dev 
+    - libevent-dev 
+    - bsdmainutils 
+    - git 
+    - libboost-all-dev 
+    - libminiupnpc-dev 
+    - libprotobuf-dev 
+    - protobuf-compiler 
+    - libqrencode-dev
+

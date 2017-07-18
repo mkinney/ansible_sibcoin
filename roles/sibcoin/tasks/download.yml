@@ -1,0 +1,13 @@
+---
+
+- name: Ensure directory exists
+  file:
+    name: /sibcoin
+    state: directory
+
+- name: Download the Sibcoin package
+  unarchive:
+    src: https://github.com/ivansib/sibcoin/releases/download/v0.16.1.1/sibcoin-0.16.1-linux64.tar.gz
+    dest: /sibcoin
+    remote_src: True
+    creates: /sibcoin/sibcoin-0.16.1/bin/sibcoind

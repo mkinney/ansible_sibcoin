@@ -1,0 +1,6 @@
+[servers]
+#mn1 ansible_ssh_host=123.123.123.123
+#mn2 ansible_ssh_host=123.123.123.124
+
+# if you don't do the preshared key, you must do something like this
+#mn4 ansible_ssh_host=123.123.123.125 ansible_user=root ansible_ssh_pass=dont_do_this_really

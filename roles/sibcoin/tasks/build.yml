@@ -1,0 +1,27 @@
+---
+
+# TODO: branch
+- name: Clone repo
+  git:
+    repo: 'https://github.com/ivansib/sibcoin.git'
+    dest: /sibcoin
+
+# TODO : rebuild if clone changes
+
+- name: Autogen
+  command: ./autogen.sh 
+  args:
+    chdir: /sibcoin
+    creates: /sibcoin/configure
+
+- name: Configure
+  command: ./configure --with-gui=no
+  args:
+    chdir: /sibcoin
+    creates: /sibcoin/src/Makefile
+
+- name: Make
+  command: make
+  args:
+    chdir: /sibcoin
+    creates: /sibcoin/src/sibcoind

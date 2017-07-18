@@ -1,0 +1,11 @@
+---
+
+- name: Look for the "sibcoind" process
+  shell: ps -ef | grep sibcoind | grep -v grep
+  register: process_list
+  changed_when: false
+  failed_when: false
+
+- name: Start "sibcoind" if needed
+  shell: nohup /sibcoin/sibcoin-0.16.1/bin/sibcoind &
+  when: "process_list.stdout.find('sibcoind') == -1"

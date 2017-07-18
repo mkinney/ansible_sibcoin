@@ -1,0 +1,38 @@
+---
+
+- name: Clone sentinel repo
+  git:
+    repo: 'https://github.com/ivansib/sentinel.git'
+    dest: /root/.sibcoin/sentinel
+    version: 'sibcoin'
+    update: no
+
+- name: Install pre-requisites for python
+  package: name={{item}} state=installed use=apt
+  with_items:
+    - python-pip
+    - python-dev
+    - build-essential
+
+# TODO: consider running: pip install --upgrade pip
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+
+- name: Install virtualenvwrapper
+  pip:
+    name: virtualenvwrapper
+
+- name: Create venv and install python requirements
+  pip:
+    requirements: /root/.sibcoin/sentinel/requirements.txt
+    virtualenv: /root/.sibcoin/sentinel/venv
+
+# Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+- name: Creates cron for sentinel
+  cron:
+    name: "Run sentinel every 5 minutes"
+    minute: "*/5"
+    hour: "*"
+    job: "cd /root/.sibcoin/sentinel && ./venv/bin/python bin/sentinel.py 2&>1 >sentinel-cron.log"

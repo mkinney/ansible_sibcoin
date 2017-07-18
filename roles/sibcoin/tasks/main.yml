@@ -1,0 +1,8 @@
+---
+
+- include: swap.yml
+- include: packages.yml
+- include: download.yml
+#- include: build.yml
+- include: running.yml
+- include: sentinel.yml
